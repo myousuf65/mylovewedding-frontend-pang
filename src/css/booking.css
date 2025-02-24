@@ -1,0 +1,268 @@
+* {
+	font-family: 'Arial', serif;
+}
+
+body {
+	font-family: 'Arial', serif;
+	margin: 0;
+	box-sizing: border-box;
+	padding: 0;
+	background-color: #fafafa;
+	color: #333;
+	line-height: 1.6;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+h1,
+h2,
+h3 {
+	font-weight: 700;
+}
+
+header {
+	background: url('../images/wedding.jpg') no-repeat center center/cover;
+	color: white;
+	padding: 120px 20px;
+	text-align: center;
+	background-size: cover;
+	background-position: center;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+header::after {
+	filter: blur(5px);
+	/* Adjust the blur intensity as needed */
+	z-index: -1;
+	/* Places the blurred background behind the content */
+}
+
+header h1 {
+	font-size: 5rem;
+	margin: 0;
+	letter-spacing: 5px;
+	text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+header p {
+	font-size: 1.5rem;
+	margin-top: 10px;
+	font-style: italic;
+	letter-spacing: 1px;
+}
+
+/* Navigation Styles */
+nav {
+	background: rgba(0, 0, 0, 0.7);
+	padding: 15px 0;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+nav ul li {
+	display: inline;
+	margin: 0 20px;
+}
+
+nav ul li a {
+	color: white;
+	text-decoration: none;
+	font-size: 1.3rem;
+	text-transform: uppercase;
+	transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+	color: #ffcc00;
+	border-bottom: 2px solid #ffcc00;
+}
+
+/* Main Content Styles */
+.container {
+	padding: 50px 20px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* Services Section */
+.services {
+	background-color: #fff;
+	padding: 60px 30px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+.services h2 {
+	font-size: 2.8rem;
+	text-align: center;
+	margin-bottom: 40px;
+	color: #333;
+}
+
+.services-grid {
+	display: flex;
+	/*justify-content: space-between;*/
+	gap: 30px;
+	/*flex-wrap: wrap;*/
+}
+
+.service-item {
+	background: #fff;
+	padding: 30px;
+	margin: 15px 0;
+	border-radius: 15px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	width: 30%;
+	text-align: center;
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
+}
+
+.service-item h3 {
+	font-size: 1.8rem;
+	margin-bottom: 10px;
+	color: #333;
+}
+
+.service-item p {
+	font-size: 1.2rem;
+	color: #555;
+}
+
+/* About Section */
+.about {
+	background-color: #f9f9f9;
+	padding: 60px 0;
+	margin-top: 40px;
+}
+
+.about h2 {
+	font-size: 2.8rem;
+	text-align: center;
+	margin-bottom: 30px;
+	color: #333;
+}
+
+.about p {
+	font-size: 1.4rem;
+	text-align: center;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+/* Contact Section */
+.contact {
+	padding: 60px 20px;
+	background-color: #fff;
+	margin-top: 40px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+.contact h2 {
+	font-size: 2.8rem;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.contact p {
+	text-align: center;
+	font-size: 1.2rem;
+	margin-bottom: 30px;
+}
+
+#contactForm input,
+#contactForm textarea {
+	width: 100%;
+	padding: 15px;
+	margin: 10px 0;
+	border-radius: 10px;
+	border: 1px solid #ddd;
+	font-size: 1.2rem;
+	transition: border-color 0.3s ease;
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+	border-color: #ffcc00;
+	outline: none;
+}
+
+button {
+	background-color: #ffcc00;
+	color: white;
+	font-size: 1.5rem;
+	padding: 15px 30px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #e6b800;
+}
+
+/* Footer Styles */
+footer {
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 60px;
+	box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+	margin: 0;
+	font-size: 1.1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+	header h1 {
+		font-size: 3.5rem;
+	}
+
+	header p {
+		font-size: 1.3rem;
+	}
+
+	.services-grid {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.service-item {
+		width: 80%;
+		margin-bottom: 20px;
+	}
+
+	.about p {
+		font-size: 1.2rem;
+	}
+
+	.contact p {
+		font-size: 1.1rem;
+	}
+
+	button {
+		font-size: 1.3rem;
+	}
+}

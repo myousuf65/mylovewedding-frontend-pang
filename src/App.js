@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import RegisterCustomer from './components/RegisterCustomer';
+import CreateBooking from './components/CreateBooking';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const url = process.env.REACT_APP_BACKEND_URL;
+	console.log("url is ", url)
+	return (
+		<Router>
+			<nav>
+				<ul>
+					<li><a className="home" href="#services">Services</a></li>
+					<li><a className="home" href="#about">About Us</a></li>
+					<li><a className="home" href="#contact">Contact</a></li>
+					<li><a href='/booking.html'>Create Booking</a></li>
+				</ul>
+			</nav>
+
+			<Routes>
+				<Route path="/" element={<LandingPage />} />
+				<Route path="/register" element={<RegisterCustomer />} />
+				<Route path="/booking" element={<CreateBooking />} />
+			</Routes>
+		</Router>
+	);
 }
 
 export default App;
