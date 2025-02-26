@@ -38,9 +38,9 @@ const CreateBooking = () => {
 
   return (
     <div className={CSSModule.container}>
-      <h1>Create Booking</h1>
+      <h1>Wedding Planner</h1>
       <form id="weddingForm" onSubmit={handleSubmit}>
-        <div className={CSSModule.formGroup}>
+        <div className={CSSModule.form-group}>
           <label htmlFor="name">Your Name</label>
           <input
             type="text"
@@ -52,7 +52,7 @@ const CreateBooking = () => {
             required
           />
         </div>
-        <div className={CSSModule.formGroup}>
+        <div className={CSSModule.form-group}>
           <label htmlFor="email">Email Address</label>
           <input
             type="email"
@@ -64,7 +64,7 @@ const CreateBooking = () => {
             required
           />
         </div>
-        <div className={CSSModule.formGroup}>
+        <div className={CSSModule.form-group}>
           <label htmlFor="phone">Phone Number</label>
           <input
             type="tel"
@@ -78,7 +78,7 @@ const CreateBooking = () => {
         </div>
 
         {/* Timeslot Selection */}
-        <div className={CSSModule.formGroup}>
+        <div className={CSSModule.form-group}>
           <label htmlFor="timeslot">Select a Timeslot</label>
           <select
             id="timeslot"
@@ -98,7 +98,7 @@ const CreateBooking = () => {
           </select>
         </div>
 
-        <div className={CSSModule.formGroup}>
+        <div className={CSSModule.form-group}>
           <label htmlFor="venue">Select a Venue</label>
           <select
             id="venue"
@@ -118,7 +118,7 @@ const CreateBooking = () => {
           </select>
         </div>
 
-        <div className={CSSModule.formGroup}>
+        <div className={CSSModule.form-group}>
           <label htmlFor="date">Select a Date</label>
           <DatePicker />
           {/* <input

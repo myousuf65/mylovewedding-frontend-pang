@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import RegisterCustomer from './components/RegisterCustomer';
 import CreateBooking from './components/CreateBooking';
-
+import CSSModule from "./css/landing.module.css"
 
 function App() {
 	const url = process.env.REACT_APP_BACKEND_URL;
@@ -12,9 +12,9 @@ function App() {
 		<Router>
 			<nav>
 				<ul>
-					<li><a className="home" href="#services">Services</a></li>
-					<li><a className="home" href="#about">About Us</a></li>
-					<li><a className="home" href="#contact">Contact</a></li>
+					<li><a className={CSSModule.home} href="#services">Services</a></li>
+					<li><a className={CSSModule.home} href="#about">About Us</a></li>
+					<li><a className={CSSModule.home} href="#contact">Contact</a></li>
 					<li><a href='/booking.html'>Create Booking</a></li>
 				</ul>
 			</nav>
