@@ -1,5 +1,5 @@
 import { React } from "react";
-import CSSModule from "../css/booking.module.css"
+import CSSModule from "../css/landing.module.css"
 
 const LandingPage = () => {
 	return (
@@ -10,7 +10,7 @@ const LandingPage = () => {
 			<div className={CSSModule.container}>
 				<section id="services" className={CSSModule.services}>
 					<h2>Our Services</h2>
-					<div className={CSSModule.serviceGrid}>
+					<div className={CSSModule.servicegrid}>
 						<div className={CSSModule.serviceItem}>
 							<h3>Wedding Planning</h3>
 							<p>Full-service wedding planning to make your day unforgettable.</p>
