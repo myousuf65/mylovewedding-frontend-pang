@@ -10,6 +10,12 @@ import { FaHome } from "react-icons/fa"; // Import an icon from react-icons
 import VenueForm from './components/VenueForm';
 import AdminPage from './components/AdminPage';
 import VenueList from './components/VenueList';
+import LawyerForm from './components/LawyerForm';
+import StylistForm from './components/StylistForm';
+import PhotographerForm from './components/PhotographerForm';
+import ViewLawyers from './components/ViewLawyers';
+import ViewPhotographers from './components/ViewPhotographers';
+import ViewStylists from './components/ViewStylists';
 
 
 function App() {
@@ -22,11 +28,6 @@ function App() {
 					<li><a className={CSSModule.home} href="/">
 						<FaHome style={{ fontSize: "30px", color: "white" }} />
 					</a></li>
-					{/*
-						<li><a className={CSSModule.home} href="/#services">Services</a></li>
-						<li><a className={CSSModule.home} href="/#about">About Us</a></li>
-						<li><a className={CSSModule.home} href="/#contact">Contact</a></li>
-					*/}
 					<li><a href='/booking'>Create Booking</a></li>
 					<li><a href='/viewbooking'>All Bookings</a></li>
 
@@ -42,6 +43,12 @@ function App() {
 				<Route path="/viewbooking" element={<ViewBookings />} />
 				<Route path="/createvenue" element={<VenueForm />} />
 				<Route path="/venues" element={<VenueList />} />
+				<Route path="/add-lawyer" element={<LawyerForm />} />
+				<Route path="/add-stylist" element={<StylistForm />} />
+				<Route path="/add-photographer" element={<PhotographerForm />} />
+				<Route path="/view-lawyers" element={<ViewLawyers />} />
+				<Route path="/view-photographers" element={<ViewPhotographers />} />
+				<Route path="/view-stylists" element={<ViewStylists />} />
 			</Routes>
 		</Router>
 	);

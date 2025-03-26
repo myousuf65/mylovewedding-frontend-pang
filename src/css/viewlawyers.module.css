@@ -1,0 +1,60 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    color: #2c5282;
+    margin: 0;
+}
+
+.backLink {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #2c5282;
+    border-radius: 4px;
+    color: #2c5282;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.backLink:hover {
+    background-color: #2c5282;
+    color: white;
+}
+
+.tableContainer {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:global(.ant-table-thead > tr > th) {
+    background-color: #4299e1 !important;
+    color: white !important;
+}
+
+:global(.ant-table-tbody > tr:hover > td) {
+    background-color: #ebf8ff !important;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+} 

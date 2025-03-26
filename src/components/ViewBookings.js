@@ -22,7 +22,6 @@ const ViewBookings = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("Delete response:", data);
-				// If deletion is successful, remove the booking from the state
 				setBookingData((prevData) =>
 					prevData.filter((booking) => booking.id !== id)
 				);
@@ -37,43 +36,46 @@ const ViewBookings = () => {
 			title: "Id",
 			dataIndex: "id",
 			key: "id",
-			render: (text) => text,
 		},
 		{
 			title: "Customer",
 			dataIndex: "customer",
-			key: "customer.id",
-			render: (text) => {
-				console.log("text", text.name);
-				return text.name;
-			},
-		},
-		{
-			title: "Timing",
-			dataIndex: "timing",
-			key: "timing",
-			render: (text) => {
-				if (text === "1") {
-					return "10:00 AM - 12:00 PM";
-				} else if (text === "2") {
-					return "2:00 PM - 4:00 PM";
-				} else if (text === "3") {
-					return "6:00 PM - 8:00 PM";
-				}
-			},
+			key: "customer",
+			render: (customer) => customer.name,
 		},
 		{
 			title: "Venue",
 			dataIndex: "venue",
 			key: "venue",
-			render: (text) => {
-				return text.venueName;
-			},
+			render: (venue) => venue.venueName,
+		},
+		{
+			title: "Date",
+			dataIndex: "date",
+			key: "date",
+		},
+		{
+			title: "Lawyer",
+			dataIndex: "lawyer",
+			key: "lawyer",
+			render: (lawyer) => lawyer.name,
+		},
+		{
+			title: "Stylist",
+			dataIndex: "stylist",
+			key: "stylist",
+			render: (stylist) => stylist.name,
+		},
+		{
+			title: "Photographer",
+			dataIndex: "photographer",
+			key: "photographer",
+			render: (photographer) => photographer.name,
 		},
 		{
 			title: "Actions",
 			key: "actions",
-			render: (text, record) => (
+			render: (_, record) => (
 				<Button
 					danger
 					onClick={() => handleDelete(record.id)}
