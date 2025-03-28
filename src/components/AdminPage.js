@@ -37,6 +37,10 @@ const AdminPage = () => {
     navigate('/view-photographers');
   };
 
+  const handleViewBookings = () => {
+    navigate('/viewbooking');
+  };
+
   return (
     <div className={styles.container}>
       <h1>Admin Dashboard</h1>
@@ -85,6 +89,15 @@ const AdminPage = () => {
             </button>
             <button className={styles.button} onClick={handleViewPhotographers}>
               View All Photographers
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2>Booking Management</h2>
+          <div className={styles.buttonGroup}>
+            <button className={styles.button} onClick={handleViewBookings}>
+              View All Bookings
             </button>
           </div>
         </div>

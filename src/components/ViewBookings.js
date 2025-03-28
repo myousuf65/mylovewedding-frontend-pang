@@ -87,7 +87,7 @@ const ViewBookings = () => {
 	];
 
 	return (
-		<div>
+		<div style={{ margin: '20px' }}>
 			<Table dataSource={bookingData} columns={columns} />
 		</div>
 	);

@@ -16,12 +16,20 @@ const CreateBooking = () => {
 		lawyerId: "",
 		stylistId: "",
 		photographerId: "",
+		totalPrice: 0,
 	});
 
 	const [venues, setVenues] = useState([]);
 	const [lawyers, setLawyers] = useState([]);
 	const [stylists, setStylists] = useState([]);
 	const [photographers, setPhotographers] = useState([]);
+
+	const [selectedServices, setSelectedServices] = useState({
+		venue: { name: '', price: 0 },
+		lawyer: { name: '', price: 0 },
+		stylist: { name: '', price: 0 },
+		photographer: { name: '', price: 0 }
+	});
 
 	useEffect(() => {
 		// Fetch venues
@@ -55,14 +63,49 @@ const CreateBooking = () => {
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
+		let newPrice = formData.totalPrice;
+		let newSelectedServices = { ...selectedServices };
+
+		// Update total price and selected service details based on selection
+		if (name === 'venueId') {
+			const venue = venues.find(v => v.venueId == value);
+			newSelectedServices.venue = {
+				name: venue?.venueName || '',
+				price: venue?.price || 0
+			};
+		} else if (name === 'lawyerId') {
+			const lawyer = lawyers.find(l => l.id == value);
+			newPrice = formData.totalPrice - (selectedServices.lawyer.price || 0) + (lawyer?.price || 0);
+			newSelectedServices.lawyer = {
+				name: lawyer?.name || '',
+				price: lawyer?.price || 0
+			};
+		} else if (name === 'stylistId') {
+			const stylist = stylists.find(s => s.id == value);
+			newPrice = formData.totalPrice - (selectedServices.stylist.price || 0) + (stylist?.price || 0);
+			newSelectedServices.stylist = {
+				name: stylist?.name || '',
+				price: stylist?.price || 0
+			};
+		} else if (name === 'photographerId') {
+			const photographer = photographers.find(p => p.id == value);
+			newPrice = formData.totalPrice - (selectedServices.photographer.price || 0) + (photographer?.price || 0);
+			newSelectedServices.photographer = {
+				name: photographer?.name || '',
+				price: photographer?.price || 0
+			};
+		}
+
 		setFormData({
 			...formData,
 			[name]: value,
+			totalPrice: newPrice
 		});
+		setSelectedServices(newSelectedServices);
 	};
 
 	const handleNext = () => {
-		if (currentStep < 5) {
+		if (currentStep < 6) {
 			setCurrentStep(currentStep + 1);
 		}
 	};
@@ -73,8 +116,8 @@ const CreateBooking = () => {
 		}
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const handleSubmit = () => {
+		// event.preventDefault();
 		fetch(`${BACKEND_URL}/booking/add`, {
 			method: "POST",
 			headers: {
@@ -85,7 +128,11 @@ const CreateBooking = () => {
 			.then(res => res.json())
 			.then(data => {
 				message.success("Booking created successfully!");
-				navigate('/viewbooking');
+				if(sessionStorage.getItem("user") !== null){
+					navigate('/profile');
+				}else{
+					message.info("Successfully added booking!!");
+				}
 			})
 			.catch(error => message.error("Failed to create booking"));
 	};
@@ -188,7 +235,7 @@ const CreateBooking = () => {
 								<option value="">Select a lawyer</option>
 								{lawyers.map((lawyer) => (
 									<option key={lawyer.id} value={lawyer.id}>
-										{lawyer.name}
+										{lawyer.name} - ${lawyer.price}
 									</option>
 								))}
 							</select>
@@ -214,7 +261,7 @@ const CreateBooking = () => {
 								<option value="">Select a stylist</option>
 								{stylists.map((stylist) => (
 									<option key={stylist.id} value={stylist.id}>
-										{stylist.name}
+										{stylist.name} - ${stylist.price}
 									</option>
 								))}
 							</select>
@@ -240,17 +287,112 @@ const CreateBooking = () => {
 								<option value="">Select a photographer</option>
 								{photographers.map((photographer) => (
 									<option key={photographer.id} value={photographer.id}>
-										{photographer.name}
+										{photographer.name} - ${photographer.price}
 									</option>
 								))}
 							</select>
 						</div>
 						<div className={CSSModule.buttonGroup}>
 							<button type="button" onClick={handleBack}>Back</button>
-							<button type="submit">Finish</button>
+							<button type="button" onClick={handleNext}>Next</button>
 						</div>
 					</>
 				);
+			case 6:
+				return (
+          <>
+            <h2>Booking Summary</h2>
+            <div className={CSSModule.summary}>
+              <div className={CSSModule.summaryItem}>
+                <h3>Personal Information</h3>
+                <div className={CSSModule.infoRow}>
+                  <span className={CSSModule.label}>Name:</span>
+                  <span className={CSSModule.value}>{formData.name}</span>
+                </div>
+                <div className={CSSModule.infoRow}>
+                  <span className={CSSModule.label}>Email:</span>
+                  <span className={CSSModule.value}>{formData.email}</span>
+                </div>
+                <div className={CSSModule.infoRow}>
+                  <span className={CSSModule.label}>Phone:</span>
+                  <span className={CSSModule.value}>{formData.phone}</span>
+                </div>
+              </div>
+              <br />
+
+              <div className={CSSModule.summaryItem}>
+                <h3>Venue & Date</h3>
+                <div className={CSSModule.infoRow}>
+                  <span className={CSSModule.label}>Venue:</span>
+                  <span className={CSSModule.value}>
+                    {selectedServices.venue.name || "None"}
+                  </span>
+                </div>
+                <div className={CSSModule.infoRow}>
+                  <span className={CSSModule.label}>Date:</span>
+                  <span className={CSSModule.value}>{formData.date}</span>
+                </div>
+              </div>
+
+              <br />
+              <div className={CSSModule.summaryItem}>
+                <h3>Selected Services</h3>
+                <div className={CSSModule.serviceRow}>
+                  <div className={CSSModule.serviceName}>
+                    <span className={CSSModule.label}>Lawyer: </span>
+                    <span className={CSSModule.value}>
+                      {selectedServices.lawyer.name || "None"}
+                    </span>
+                    <span>---</span>
+                    <span className={CSSModule.price}>
+                      ${selectedServices.lawyer.price}
+                    </span>
+                  </div>
+                </div>
+
+                <div className={CSSModule.serviceRow}>
+                  <div className={CSSModule.serviceName}>
+                    <span className={CSSModule.label}>Stylist: </span>
+                    <span className={CSSModule.value}>
+                      {selectedServices.stylist.name || "None"}
+                    </span>
+                    <span>---</span>
+                    <span className={CSSModule.price}>
+                      ${selectedServices.stylist.price}
+                    </span>
+                  </div>
+                </div>
+
+                <div className={CSSModule.serviceRow}>
+                  <div className={CSSModule.serviceName}>
+                    <span className={CSSModule.label}>Photographer: </span>
+                    <span className={CSSModule.value}>
+                      {selectedServices.photographer.name || "None"}
+                    </span>
+                    <span>---</span>
+                    <span className={CSSModule.price}>
+                      ${selectedServices.photographer.price}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={CSSModule.totalPrice}>
+                <span className={CSSModule.label}>Total Price:</span>
+                <span className={CSSModule.price}>${formData.totalPrice}</span>
+              </div>
+            </div>
+
+            <div className={CSSModule.buttonGroup}>
+              <button type="button" onClick={handleBack}>
+                Back
+              </button>
+              <button type="button" onClick={handleSubmit}>
+                Confirm Booking
+              </button>
+            </div>
+          </>
+        );
 			default:
 				return null;
 		}
@@ -265,8 +407,9 @@ const CreateBooking = () => {
 				<div className={`${CSSModule.progressStep} ${currentStep >= 3 ? CSSModule.active : ''}`}>Lawyer</div>
 				<div className={`${CSSModule.progressStep} ${currentStep >= 4 ? CSSModule.active : ''}`}>Stylist</div>
 				<div className={`${CSSModule.progressStep} ${currentStep >= 5 ? CSSModule.active : ''}`}>Photographer</div>
+				<div className={`${CSSModule.progressStep} ${currentStep >= 6 ? CSSModule.active : ''}`}>Summary</div>
 			</div>
-			<form onSubmit={handleSubmit}>
+			<form>
 				{renderStep()}
 			</form>
 		</div>
